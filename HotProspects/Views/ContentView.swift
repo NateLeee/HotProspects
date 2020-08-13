@@ -11,7 +11,10 @@ import SwiftUI
 
 
 struct ContentView: View {
+    var prospects = Prospects()
+    
     @State private var selectedTab: Int = 0
+    
     
     var body: some View {
         TabView {
@@ -41,6 +44,7 @@ struct ContentView: View {
             }
             
         }
+        .environmentObject(prospects)
     }
     
     // Custom funcs
