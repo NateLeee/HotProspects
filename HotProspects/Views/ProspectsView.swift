@@ -20,6 +20,7 @@ struct ProspectsView: View {
     @EnvironmentObject var prospects: Prospects
     
     @State private var isShowingScanner = false
+    @State private var showingSortOptions = false
     
     let filter: FilterType
     
@@ -83,7 +84,14 @@ struct ProspectsView: View {
                 }
             }
             .navigationBarTitle(title)
-            .navigationBarItems(trailing: Button(action: {
+            .navigationBarItems(leading: Button(action: {
+                self.showingSortOptions = true // Bring up the action sheet
+                
+            }, label: {
+                Image(systemName: "slider.horizontal.3")
+                Text("Sort")
+                
+            }), trailing: Button(action: {
                 self.isShowingScanner = true
                 
             }) {
@@ -92,7 +100,22 @@ struct ProspectsView: View {
             })
         }
         .sheet(isPresented: $isShowingScanner) {
-            CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\nexample@cool.com", completion: self.handleScan(result:))
+            CodeScannerView(codeTypes: [.qr], simulatedData: "A\nexample@cool.com", completion: self.handleScan(result:))
+        }
+        .actionSheet(isPresented: $showingSortOptions) {
+            ActionSheet(title: Text("Sort"), message: Text("Sort by?"), buttons: [
+                .default(Text("Name"), action: {
+                    // TODO: - Sort them by their name
+                    self.prospects.sort(by: .name)
+                    
+                }),
+                .default(Text("Most recent"), action: {
+                    // TODO: - Sort them other way
+                    self.prospects.sort(by: .mostRecent)
+                    
+                }),
+                ActionSheet.Button.cancel()
+            ])
         }
     }
     
@@ -147,9 +170,7 @@ struct ProspectsView: View {
                 }
             }
         }
-        
     }
-    
 }
 
 

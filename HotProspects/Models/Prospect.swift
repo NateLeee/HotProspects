@@ -14,6 +14,7 @@ class Prospect: Identifiable, Codable, Comparable {
     var name = "Anonymous"
     var emailAddress = ""
     fileprivate(set) var isContacted = false
+    fileprivate(set) var updatedAt = Date()
     
     static func == (lhs: Prospect, rhs: Prospect) -> Bool {
         lhs.id == rhs.id
@@ -67,12 +68,34 @@ class Prospects: ObservableObject {
     func toggle(_ prospect: Prospect) {
         objectWillChange.send()
         prospect.isContacted.toggle()
+        
+        prospect.updatedAt = Date()
+        
         save()
     }
     
     func add(_ prospect: Prospect) {
         people.append(prospect)
         
+        prospect.updatedAt = Date()
+        
         save()
+    }
+    
+    enum SortOption {
+        case name
+        case mostRecent
+    }
+    
+    func sort(by sortingOption: SortOption) {
+        switch sortingOption {
+        case .name:
+            people.sort() // I said it 'cause I can.
+            
+        case .mostRecent:
+            people.sort { (lhs, rhs) -> Bool in
+                lhs.updatedAt > rhs.updatedAt
+            }
+        }
     }
 }
