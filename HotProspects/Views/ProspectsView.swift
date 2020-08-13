@@ -53,15 +53,18 @@ struct ProspectsView: View {
                         Text(prospect.emailAddress)
                             .foregroundColor(.secondary)
                     }
+                    .contextMenu {
+                        Button(action: {
+                            // prospect.isContacted.toggle() // Won't update the UI
+                            self.prospects.toggle(prospect)
+                        }) {
+                            Text("\(prospect.isContacted ? "Mark Uncontacted" : "Mark Contacted")")
+                        }
+                    }
                 }
             }
             .navigationBarTitle(title)
             .navigationBarItems(trailing: Button(action: {
-                // TODO: - Scan QR Code first.
-                //                let prospect = Prospect()
-                //                prospect.name = "Paul Hudson"
-                //                prospect.emailAddress = "paul@hackingwithswift.com"
-                //                self.prospects.people.append(prospect)
                 self.isShowingScanner = true
                 
             }) {
@@ -70,14 +73,6 @@ struct ProspectsView: View {
             })
         }
         .sheet(isPresented: $isShowingScanner) {
-            //            CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\nexample@cool.com") { (result) in
-            //                switch result {
-            //                case .failure(let error):
-            //                    print(error.localizedDescription)
-            //                case .success(let str):
-            //                    print(str)
-            //                }
-            //            }
             CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\nexample@cool.com", completion: self.handleScan(result:))
         }
     }
