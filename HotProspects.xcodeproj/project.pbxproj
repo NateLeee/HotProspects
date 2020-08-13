@@ -12,6 +12,7 @@
 		FAA6691D24E4F73F00E59927 /* MeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA6691C24E4F73F00E59927 /* MeView.swift */; };
 		FAA6691F24E4F98C00E59927 /* Prospect.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA6691E24E4F98C00E59927 /* Prospect.swift */; };
 		FAA6692324E501EE00E59927 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = FAA6692224E501EE00E59927 /* CodeScanner */; };
+		FAA6692524E50E3600E59927 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA6692424E50E3600E59927 /* Constants.swift */; };
 		FAE10EF624E2E248000DBEE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE10EF524E2E248000DBEE9 /* AppDelegate.swift */; };
 		FAE10EF824E2E248000DBEE9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE10EF724E2E248000DBEE9 /* SceneDelegate.swift */; };
 		FAE10EFB24E2E248000DBEE9 /* HotProspects.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAE10EF924E2E248000DBEE9 /* HotProspects.xcdatamodeld */; };
@@ -25,6 +26,7 @@
 		FAA6691A24E4F73100E59927 /* ProspectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProspectsView.swift; sourceTree = "<group>"; };
 		FAA6691C24E4F73F00E59927 /* MeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeView.swift; sourceTree = "<group>"; };
 		FAA6691E24E4F98C00E59927 /* Prospect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prospect.swift; sourceTree = "<group>"; };
+		FAA6692424E50E3600E59927 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FAE10EF224E2E248000DBEE9 /* HotProspects.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HotProspects.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE10EF524E2E248000DBEE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAE10EF724E2E248000DBEE9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +70,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		FAA6692624E50E3900E59927 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				FAA6692424E50E3600E59927 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		FAE10EE924E2E248000DBEE9 = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +99,7 @@
 			children = (
 				FAE10EF524E2E248000DBEE9 /* AppDelegate.swift */,
 				FAE10EF724E2E248000DBEE9 /* SceneDelegate.swift */,
+				FAA6692624E50E3900E59927 /* Constants */,
 				FAA6692024E4F99000E59927 /* Models */,
 				FA39423024E41F410054FC8C /* Views */,
 				FAE10EFE24E2E24C000DBEE9 /* Assets.xcassets */,
@@ -193,6 +204,7 @@
 				FAA6691B24E4F73100E59927 /* ProspectsView.swift in Sources */,
 				FAE10EFD24E2E248000DBEE9 /* ContentView.swift in Sources */,
 				FAE10EFB24E2E248000DBEE9 /* HotProspects.xcdatamodeld in Sources */,
+				FAA6692524E50E3600E59927 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
