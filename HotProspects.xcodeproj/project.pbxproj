@@ -62,6 +62,7 @@
 		FAA6692024E4F99000E59927 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FAE10EF924E2E248000DBEE9 /* HotProspects.xcdatamodeld */,
 				FAA6691E24E4F98C00E59927 /* Prospect.swift */,
 			);
 			path = Models;
@@ -93,7 +94,6 @@
 				FAE10EFE24E2E24C000DBEE9 /* Assets.xcassets */,
 				FAE10F0324E2E24C000DBEE9 /* LaunchScreen.storyboard */,
 				FAE10F0624E2E24C000DBEE9 /* Info.plist */,
-				FAE10EF924E2E248000DBEE9 /* HotProspects.xcdatamodeld */,
 				FAE10F0024E2E24C000DBEE9 /* Preview Content */,
 			);
 			path = HotProspects;

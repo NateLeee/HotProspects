@@ -92,6 +92,9 @@ struct ProspectsView: View {
             
             self.prospects.people.append(person)
             
+            // Never forget to save!
+            self.prospects.save()
+            
         case .failure(let error):
             print("Scanning failed: \(error.localizedDescription)")
         }
