@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-
+import UserNotifications
 
 
 struct ContentView: View {
@@ -15,40 +15,36 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text("Placeholder")
-                .padding()
-                .layoutPriority(1)
-                .padding()
-                .background(backgroundColor)
+            Button("Request Permission") {
+                UNUserNotificationCenter.current().requestAuthorization(
+                options: [UNAuthorizationOptions.alert, .badge, .sound]) { (success, error) in
+                    if (success) {
+                        print("All set!")
+                    } else if let error = error {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+            .padding()
             
-            Text("3D Touch Me")
-                .padding()
-                .contextMenu(ContextMenu(menuItems: {
-                    Button(action: {
-                        self.backgroundColor = .red
-                    }) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.white)
-                        Text("Red")
+            Button("Schedule Notification") {
+                // second
+                let content = UNMutableNotificationContent()
+                content.title = "Test Notification Content title"
+                content.subtitle = "Subtitle"
+                content.sound = .defaultCritical
+                
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
+                
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                
+                UNUserNotificationCenter.current().add(request) { (error) in
+                    if let error = error {
+                        print(error.localizedDescription)
                     }
-                    
-                    Button(action: {
-                        self.backgroundColor = .blue
-                    }) {
-                        Text("Blue")
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.blue)
-                    }
-                    
-                    Button(action: {
-                        self.backgroundColor = .yellow
-                    }) {
-                        Text("Yellow")
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.yellow)
-                    }
-                    
-                }))
+                }
+            }
+            .padding()
         }
     }
     
