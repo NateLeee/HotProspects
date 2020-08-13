@@ -8,33 +8,59 @@
 
 import SwiftUI
 
-class Prospect: Identifiable, Codable {
+class Prospect: Identifiable, Codable, Comparable {
     let id = UUID()
     
     var name = "Anonymous"
     var emailAddress = ""
     fileprivate(set) var isContacted = false
+    
+    static func == (lhs: Prospect, rhs: Prospect) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    static func < (lhs: Prospect, rhs: Prospect) -> Bool {
+        lhs.name < rhs.name
+    }
+    
 }
 
 class Prospects: ObservableObject {
     @Published fileprivate(set) var people: [Prospect]
     
     init() {
-        // UserDefaults
-        if let data = UserDefaults.standard.data(forKey: Constants.saveKey) {
-            if let prospects = try? JSONDecoder().decode([Prospect].self, from: data) {
-                self.people = prospects
-                return
-            }
+        // Now, decode JSON from the document dir.
+        let url = Utilities.getDocumentsDirectory().appendingPathComponent(Constants.saveFileName)
+        
+        do {
+            let data = try Data(contentsOf: url)
+            people = try JSONDecoder().decode([Prospect].self, from: data)
+            return
+            
+        } catch {
+            print("Unable to load saved data.")
         }
         
         self.people = []
-        
     }
     
     private func save() {
         if let encoded = try? JSONEncoder().encode(self.people) {
-            UserDefaults.standard.setValue(encoded, forKey: Constants.saveKey)
+            // UserDefaults.standard.setValue(encoded, forKey: Constants.saveKey)
+            
+            // Save data to the document dir.
+            let url = Utilities.getDocumentsDirectory().appendingPathComponent(Constants.saveFileName)
+            do {
+                try encoded.write(to: url, options: [.atomicWrite])
+                
+                #if DEBUG
+                let input = try String(contentsOf: url)
+                print(input)
+                #endif
+                
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
     

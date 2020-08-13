@@ -10,4 +10,5 @@ import Foundation
 
 struct Constants {
     static let saveKey = "SavedData"
+    static let saveFileName = "people.json"
 }
